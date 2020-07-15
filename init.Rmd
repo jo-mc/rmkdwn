@@ -5,15 +5,96 @@ date: "14/07/2020"
 output: html_document
 ---
 
+So knit - html. To setup git need repository created first? in github, then create project of same name in R with options git.
+>>> followed this : https://community.rstudio.com/t/rstudio-git-commit-not-associated-with-github-account/27633/2   TO:  https://happygitwithr.com/rstudio-git-github.html
+
+Then need to stage? files to have them uploaded. 
+
+Next create a web page in github. Followed: Khan academy, https://www.khanacademy.org/computing/computer-programming/html-css/web-development-tools/a/hosting-your-website-on-github
+>>>  Make sure to name your project exactly “YOUR_USERNAME.github.io”. That tells Github that you’re making a special webpage project
+
+but it looks like you can do it for any repository, GITHUB Docs:
+>>>https://docs.github.com/en/github/working-with-github-pages/creating-a-github-pages-site
+
+Then uploaded the rmarkdown html file. Modified the index.html file from the web page created by Khan:
+
+Test project web page
+<a href="init.html">r studio markdown : in web page folder</a>
+<a href="https://jo-mc.github.io/rmkdwn/init.html">r studio markdown 
+: project rmkdwn</a></br>
+</br>
+
+ALso uploaded the init.html form the rmkdwn project.
+
+So the local ref for init.html (which I manually drage and dropped into the web page project works - it did take several minutes for the page to work)
+
+The second method via the rmkdwn project does not seem to work. ??
+
+
+
+##  "Day2"
+#### author: "joe"
+#### date: "15/07/2020"
+#### output: html_document
+
+DATA: HG005_sumcount.mpu, /data/rc003/joe/CCS/chinese_trio/pileup_200+
+```
+chr1 10467 10         1 1  
+chr1 10966 5          2 2  
+chr1 66218 64         1 3  
+```
+FROM: 
+
+> grep -o -n '[+]' HG005.mpu | cut -d : -f 1 | uniq -c > HG005_+count.mpu paste HG005_sum.mpu
+> HG005_+count.mpu > HG005_sumcount.mpu
+
+R import filtered data from pileup: 
+
+df <- read.table("C:/BIGDATA______TEMPORARY/chinese_trio_pileup_200+/HG005_sumcount.mpu")
+
+> x1 <- c("chr2")
+
+> sub <- df[df$V1 %in% x1,3]
+
+GIVES:
+
+This is correct chr2 has 3690 values. row 3 is the read depth
+
+AND :PLOT:
+
+> y <- df[df$V1 %in% x1,3]
+
+> x <- df[df$V1 %in% x1,2]
+
+> plot(x,y)
+
+**Insert figure from file:**
+![chr2 read depth HG005](C:/Users/jolal/OneDrive/Documents\R\rmkdwn2\Rplot_chr2HG005_readdepth.png)
+
+**Insert figure with r code:**
+
+```{r}
+df <- read.table("C:/BIGDATA______TEMPORARY/chinese_trio_pileup_200+/HG005_sumcount.mpu")
+x1 <- c("chr2")
+ y <- df[df$V1 %in% x1,3]
+ x <- df[df$V1 %in% x1,2]
+ plot(x,y)
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+
+--------------------
+## Sample
+--------------------
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+When you click the **Knit** button a document will be generated that includes both content  as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
 summary(cars)
